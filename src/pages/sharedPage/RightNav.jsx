@@ -2,19 +2,43 @@ import { FaFacebook, FaGithub, FaGoogle, FaInstagram, FaTwitter } from "react-ic
 import qzone1 from '../../assets/qZone1.png'
 import qzone2 from '../../assets/qZone2.png'
 import qzone3 from '../../assets/qZone3.png'
+import { useContext } from "react";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const RightNav = () => {
+
+    const { GoogleSignIn, GithubSignIn } = useContext(AuthContext)
+
+    const handleGoogleSignIn = () => {
+        GoogleSignIn()
+            .then(result => {
+                console.log(result.user)
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    }
+    const handleGithubSignIn = () => {
+        GithubSignIn()
+            .then(result => {
+                console.log(result.user)
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    }
+
     return (
         <div className="space-y-5">
             <div>
                 <h2 className="text-2xl font-bold py-3">Login With</h2>
-                <button className="btn w-full btn-outline mb-3 btn-info text-[18px]">
+                <button onClick={handleGoogleSignIn} className="btn w-full btn-outline mb-3 btn-info text-[18px]">
                     <FaGoogle></FaGoogle>
                     Login with google
                 </button>
-                <button className="btn w-full btn-outline text-[18px]">
+                <button onClick={handleGithubSignIn} className="btn w-full btn-outline text-[18px]">
                     <FaGithub></FaGithub>
-                    Login with google
+                    Login with github
                 </button>
             </div>
 
