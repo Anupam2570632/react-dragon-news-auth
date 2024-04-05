@@ -6,6 +6,8 @@ export const AuthContext = createContext()
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
+    const [news, setNews] = useState([]);
+    const [allNews, setAllNews] = useState([]);
 
 
     const createUser = (email, password) => {
@@ -39,8 +41,27 @@ const AuthProvider = ({ children }) => {
 
     }, [])
 
+    useEffect(() => {
+        fetch('/news.json')
+            .then(res => res.json())
+            .then(data => {
+                setNews(data)
+                setAllNews(data)
+            })
+    }, [])
 
-    const AuthInfo = { user, createUser, logIn, logOut, GoogleSignIn, GithubSignIn }
+
+    const filterNews = (category) => {
+        if (category == 0) {
+            setNews(allNews)
+        }
+        else {
+            const filteredNews = allNews.filter((aNews) => aNews.category_id == category)
+            setNews(filteredNews)
+        }
+    }
+
+    const AuthInfo = { user, createUser, logIn, logOut, GoogleSignIn, GithubSignIn, news, filterNews }
 
 
     return (

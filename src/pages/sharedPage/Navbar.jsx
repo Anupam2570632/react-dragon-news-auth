@@ -38,7 +38,12 @@ const Navbar = () => {
             <div className="flex navbar-end gap-4 my-2">
                 <div className="btn btn-ghost btn-circle avatar">
                     <div className="w-10 rounded-full">
-                        <FaRegUserCircle className="w-full h-full"></FaRegUserCircle>
+                        {
+                            user?.photoURL ?
+                            <img src={user.photoURL} alt="" />
+                            :
+                            <FaRegUserCircle className="w-full h-full"></FaRegUserCircle>
+                        }
                     </div>
                 </div>
                 {
