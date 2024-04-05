@@ -8,6 +8,7 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [news, setNews] = useState([]);
     const [allNews, setAllNews] = useState([]);
+    const [loader, setLoader] = useState(true)
 
 
     const createUser = (email, password) => {
@@ -15,6 +16,7 @@ const AuthProvider = ({ children }) => {
     }
 
     const logIn = (email, password) => {
+        setLoader(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
 
@@ -23,16 +25,19 @@ const AuthProvider = ({ children }) => {
     }
     const googleProvider = new GoogleAuthProvider()
     const GoogleSignIn = () => {
+        setLoader(true)
         return signInWithPopup(auth, googleProvider)
     }
     const githubProvider = new GithubAuthProvider()
     const GithubSignIn = () => {
+        setLoader(true)
         return signInWithPopup(auth, githubProvider)
     }
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser)
+            setLoader(false)
         })
 
         return () => {
@@ -61,7 +66,7 @@ const AuthProvider = ({ children }) => {
         }
     }
 
-    const AuthInfo = { user, createUser, logIn, logOut, GoogleSignIn, GithubSignIn, news, filterNews }
+    const AuthInfo = { user, createUser, logIn, logOut, loader, GoogleSignIn, GithubSignIn, news, filterNews }
 
 
     return (

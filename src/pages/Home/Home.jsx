@@ -46,7 +46,7 @@ const Home = () => {
                                     <div>
                                         <img src={oneNews.image_url} alt="" />
                                     </div>
-                                    <p className="text-[#706F6F] font-semibold">{oneNews.details.slice(0, 250)} <span className="font-semibold underline text-[#FF8C47]"><Link>Read More</Link></span></p>
+                                    <p className="text-[#706F6F] font-semibold">{oneNews.details.slice(0, 250)} <span className="font-semibold underline text-[#FF8C47]"><Link to={`/news/newsDetails-/${oneNews._id}`}>Read More</Link></span></p>
                                     <hr />
                                     <div className="flex items-center justify-between">
                                         <div className="flex gap-3 items-center">

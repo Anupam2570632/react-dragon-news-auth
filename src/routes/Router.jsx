@@ -3,6 +3,8 @@ import Root from "../layout/Root";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import NewsDetails from "../pages/NewsDetails/NewsDetails";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -19,7 +21,11 @@ const router = createBrowserRouter([
             },
             {
                 path: '/register',
-                element: <Register/>
+                element: <Register />
+            },
+            {
+                path: '/news/newsDetails-/:id',
+                element: <PrivateRoute><NewsDetails /></PrivateRoute>
             }
         ]
     }
